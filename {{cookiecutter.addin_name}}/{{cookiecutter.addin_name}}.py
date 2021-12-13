@@ -71,7 +71,7 @@ def run(context):
         tab = ws.toolbarTabs.itemById("ToolsTab")
         panel = tab.toolbarPanels.itemById("SolidScriptsAddinsPanel")
         cmd = ui.commandDefinitions.addButtonDefinition(
-            "{{cookiecutter.addin_name}}commandid", "my command", ""
+            "{{cookiecutter.addin_name}}commandid", "{{cookiecutter.addin_name}}", ""
         )
         ctrl = panel.controls.addCommand(cmd)
 
