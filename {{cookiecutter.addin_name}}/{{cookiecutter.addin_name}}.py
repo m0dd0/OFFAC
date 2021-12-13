@@ -1,4 +1,3 @@
-import logging
 import adsk.core, adsk.fusion, traceback
 
 handlers = []
@@ -7,35 +6,35 @@ ctrl = None
 ui = None
 
 
-class MyCreatedHandler(adsk.core.CommandCreatedEventHandler):
+class {{cookiecutter.addin_name|upper}}CreatedHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args: adsk.core.CommandCreatedEventArgs):
-        print("started MyCreatedHandler")
+        print("started {{cookiecutter.addin_name|upper}}CreatedHandler")
         try:
-            myInputChangedHandler = MyInputChangedHandler()
-            handlers.append(myInputChangedHandler)
-            args.command.inputChanged.add(myInputChangedHandler)
+            inputChangedHandler = {{cookiecutter.addin_name|upper}}InputChangedHandler()
+            handlers.append(inputChangedHandler)
+            args.command.inputChanged.add(inputChangedHandler)
 
-            myExecuteHandler = MyExecuteHandler()
-            handlers.append(myExecuteHandler)
-            args.command.execute.add(myExecuteHandler)
+            executeHandler = {{cookiecutter.addin_name|upper}}ExecuteHandler()
+            handlers.append(executeHandler)
+            args.command.execute.add(executeHandler)
 
             args.command.commandInputs.addBoolValueInput(
-                "MyAddinBoolInputId", "bool input", True
+                "{{cookiecutter.addin_name}}BoolInputId", "bool input", True
             )
         except:
             if ui:
                 ui.messageBox(traceback.format_exc())
 
 
-class MyInputChangedHandler(adsk.core.InputChangedEventHandler):
+class {{cookiecutter.addin_name|upper}}InputChangedHandler(adsk.core.InputChangedEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args):
-        print("started MyInputChangedHandler")
+        print("started {{cookiecutter.addin_name|upper}}InputChangedHandler")
         try:
             command = args.firingEvent.sender
             cmdInput = args.input
@@ -45,12 +44,12 @@ class MyInputChangedHandler(adsk.core.InputChangedEventHandler):
                 ui.messageBox(traceback.format_exc())
 
 
-class MyExecuteHandler(adsk.core.CommandEventHandler):
+class {{cookiecutter.addin_name|upper}}ExecuteHandler(adsk.core.CommandEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args):
-        print("started MyExecuteHandler")
+        print("started {{cookiecutter.addin_name|upper}}ExecuteHandler")
         try:
             command = args.firingEvent.sender
 
@@ -72,11 +71,11 @@ def run(context):
         tab = ws.toolbarTabs.itemById("ToolsTab")
         panel = tab.toolbarPanels.itemById("SolidScriptsAddinsPanel")
         cmd = ui.commandDefinitions.addButtonDefinition(
-            "verycustomcommandid", "my command", ""
+            "{{cookiecutter.addin_name}}commandid", "my command", ""
         )
         ctrl = panel.controls.addCommand(cmd)
 
-        onCreated = MyCreatedHandler()
+        onCreated = {{cookiecutter.addin_name|upper}}CreatedHandler()
         cmd.commandCreated.add(onCreated)
         handlers.append(onCreated)
 
