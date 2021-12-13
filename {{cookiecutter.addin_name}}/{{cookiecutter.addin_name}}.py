@@ -6,18 +6,18 @@ ctrl = None
 ui = None
 
 
-class {{cookiecutter.addin_name|upper}}CreatedHandler(adsk.core.CommandCreatedEventHandler):
+class {{cookiecutter.addin_name|capitalize}}CreatedHandler(adsk.core.CommandCreatedEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args: adsk.core.CommandCreatedEventArgs):
-        print("started {{cookiecutter.addin_name|upper}}CreatedHandler")
+        print("started {{cookiecutter.addin_name|capitalize}}CreatedHandler")
         try:
-            inputChangedHandler = {{cookiecutter.addin_name|upper}}InputChangedHandler()
+            inputChangedHandler = {{cookiecutter.addin_name|capitalize}}InputChangedHandler()
             handlers.append(inputChangedHandler)
             args.command.inputChanged.add(inputChangedHandler)
 
-            executeHandler = {{cookiecutter.addin_name|upper}}ExecuteHandler()
+            executeHandler = {{cookiecutter.addin_name|capitalize}}ExecuteHandler()
             handlers.append(executeHandler)
             args.command.execute.add(executeHandler)
 
@@ -29,12 +29,12 @@ class {{cookiecutter.addin_name|upper}}CreatedHandler(adsk.core.CommandCreatedEv
                 ui.messageBox(traceback.format_exc())
 
 
-class {{cookiecutter.addin_name|upper}}InputChangedHandler(adsk.core.InputChangedEventHandler):
+class {{cookiecutter.addin_name|capitalize}}InputChangedHandler(adsk.core.InputChangedEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args):
-        print("started {{cookiecutter.addin_name|upper}}InputChangedHandler")
+        print("started {{cookiecutter.addin_name|capitalize}}InputChangedHandler")
         try:
             command = args.firingEvent.sender
             cmdInput = args.input
@@ -44,12 +44,12 @@ class {{cookiecutter.addin_name|upper}}InputChangedHandler(adsk.core.InputChange
                 ui.messageBox(traceback.format_exc())
 
 
-class {{cookiecutter.addin_name|upper}}ExecuteHandler(adsk.core.CommandEventHandler):
+class {{cookiecutter.addin_name|capitalize}}ExecuteHandler(adsk.core.CommandEventHandler):
     def __init__(self):
         super().__init__()
 
     def notify(self, args):
-        print("started {{cookiecutter.addin_name|upper}}ExecuteHandler")
+        print("started {{cookiecutter.addin_name|capitalize}}ExecuteHandler")
         try:
             command = args.firingEvent.sender
 
@@ -75,7 +75,7 @@ def run(context):
         )
         ctrl = panel.controls.addCommand(cmd)
 
-        onCreated = {{cookiecutter.addin_name|upper}}CreatedHandler()
+        onCreated = {{cookiecutter.addin_name|capitalize}}CreatedHandler()
         cmd.commandCreated.add(onCreated)
         handlers.append(onCreated)
 
