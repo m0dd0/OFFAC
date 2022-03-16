@@ -7,9 +7,6 @@ ui = None
 
 
 class {{cookiecutter.addin_name|capitalize}}CreatedHandler(adsk.core.CommandCreatedEventHandler):
-    def __init__(self):
-        super().__init__()
-
     def notify(self, eventArgs: adsk.core.CommandCreatedEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}CreatedHandler")
         try:
@@ -30,9 +27,6 @@ class {{cookiecutter.addin_name|capitalize}}CreatedHandler(adsk.core.CommandCrea
 
 
 class {{cookiecutter.addin_name|capitalize}}InputChangedHandler(adsk.core.InputChangedEventHandler):
-    def __init__(self):
-        super().__init__()
-
     def notify(self, eventArgs: adsk.core.InputChangedEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}InputChangedHandler")
         try:
@@ -45,9 +39,6 @@ class {{cookiecutter.addin_name|capitalize}}InputChangedHandler(adsk.core.InputC
 
 
 class {{cookiecutter.addin_name|capitalize}}ExecuteHandler(adsk.core.CommandEventHandler):
-    def __init__(self):
-        super().__init__()
-
     def notify(self, eventArgs: adsk.core.CommandEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}ExecuteHandler")
         try:
