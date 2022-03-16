@@ -10,18 +10,18 @@ class {{cookiecutter.addin_name|capitalize}}CreatedHandler(adsk.core.CommandCrea
     def __init__(self):
         super().__init__()
 
-    def notify(self, args: adsk.core.CommandCreatedEventArgs):
+    def notify(self, eventArgs: adsk.core.CommandCreatedEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}CreatedHandler")
         try:
             inputChangedHandler = {{cookiecutter.addin_name|capitalize}}InputChangedHandler()
             handlers.append(inputChangedHandler)
-            args.command.inputChanged.add(inputChangedHandler)
+            eventArgs.command.inputChanged.add(inputChangedHandler)
 
             executeHandler = {{cookiecutter.addin_name|capitalize}}ExecuteHandler()
             handlers.append(executeHandler)
-            args.command.execute.add(executeHandler)
+            eventArgs.command.execute.add(executeHandler)
 
-            args.command.commandInputs.addBoolValueInput(
+            eventArgs.command.commandInputs.addBoolValueInput(
                 "{{cookiecutter.addin_name}}BoolInputId", "bool input", True
             )
         except:
@@ -33,11 +33,11 @@ class {{cookiecutter.addin_name|capitalize}}InputChangedHandler(adsk.core.InputC
     def __init__(self):
         super().__init__()
 
-    def notify(self, args):
+    def notify(self, eventArgs: adsk.core.InputChangedEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}InputChangedHandler")
         try:
-            command = args.firingEvent.sender
-            cmdInput = args.input
+            command = eventArgs.firingEvent.sender
+            cmdInput = eventArgs.input
 
         except:
             if ui:
@@ -48,10 +48,10 @@ class {{cookiecutter.addin_name|capitalize}}ExecuteHandler(adsk.core.CommandEven
     def __init__(self):
         super().__init__()
 
-    def notify(self, args):
+    def notify(self, eventArgs: adsk.core.CommandEventArgs):
         print("started {{cookiecutter.addin_name|capitalize}}ExecuteHandler")
         try:
-            command = args.firingEvent.sender
+            command = eventArgs.firingEvent.sender
 
         except:
             if ui:
