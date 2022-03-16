@@ -49,7 +49,7 @@ class {{cookiecutter.addin_name|capitalize}}ExecuteHandler(adsk.core.CommandEven
                 ui.messageBox(traceback.format_exc())
 
 
-def run(context):
+def run(context): #pylint:disable=unused-argument
     try:
         global ui
         global cmd
@@ -75,11 +75,8 @@ def run(context):
             ui.messageBox("Failed:\n{}".format(traceback.format_exc()))
 
 
-def stop(context):
+def stop(context): #pylint:disable=unused-argument
     try:
-        global cmd
-        global ctrl
-
         ctrl.deleteMe()
         cmd.deleteMe()
     except:
